@@ -1,10 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is built with Next.js and serves as the frontend for a job listing and scraping platform.
 
-## Getting Started
 
-First, run the development server:
+Start the development server with:
 
-```bash
 npm run dev
 # or
 yarn dev
@@ -12,25 +10,30 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Once running, open http://localhost:3000 in your browser to view the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The main entry point for editing is app/page.js. Any changes you make there will automatically refresh in the browser.
 
-## Learn More
+🖋 Fonts
 
-To learn more about Next.js, take a look at the following resources:
+This app uses next/font for performance-friendly font loading. By default, it comes with Geist, a clean modern font designed by Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📚 Additional Resources
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Want to dive deeper into Next.js? Check these out:
 
-## Deploy on Vercel
+📖 Official Next.js Docs – In-depth guide to Next.js features.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎓 Interactive Next.js Tutorial – Hands-on step-by-step learning.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+💻 Next.js GitHub – Contribute or see the source code.
+
+☁️ Deployment
+
+The recommended way to deploy this project is with Vercel, the creators of Next.js.
+
+For more information, see the Next.js deployment guide.
+
+👉 This makes it sound like your own documentation instead of the stock create-next-app README.

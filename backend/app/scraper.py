@@ -93,7 +93,7 @@ time.sleep(2)
 
 # Loop through multiple pages
 page = 1
-max_pages = 5  # Change this to scrape more pages
+max_pages = 4 
 
 while True:
     print(f"\n📄 Scraping page {page}")
@@ -103,4 +103,4 @@ while True:
     page += 1
 
 driver.quit()
-print("✅ Scraping is completed.")
+print("✅ Scraping completed.")

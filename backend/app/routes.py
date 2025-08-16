@@ -7,7 +7,7 @@ import os
 
 job_routes = Blueprint("job_routes", __name__)
 
-# Helper: Convert model to dictionary
+# It helps to convert model to dictionary
 def job_to_dict(job):
     return {
         "id": job.id,
@@ -19,7 +19,7 @@ def job_to_dict(job):
         "tags": job.tags.split(",") if job.tags else [],
     }
 
-#GET /jobs — list all jobs (with filters and sort)
+#GET /jobs — list all jobs (with can be filtered and sorted)
 @job_routes.route("/jobs", methods=["GET"])
 def get_jobs():
     try:

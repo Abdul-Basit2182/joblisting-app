@@ -124,6 +124,13 @@ export default function Home() {
 
     {/* Controls */}
     <div className="flex flex-wrap justify-end gap-3 mb-8">
+        <a
+    href="/add-job"
+    className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
+    style={{ backgroundColor: "#379443ff" }} 
+  >
+    Post Job
+  </a>
       <button
         onClick={resetFilters}
         className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
@@ -138,19 +145,13 @@ export default function Home() {
           Delete All
         </button>
       )}
-      <button
-        onClick={handleScrape}
-        className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
-      >
-        Scrape Jobs
-      </button>
     </div>
 
     {/* Filters */}
     <div className="mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg">
       <input
         type="text"
-        placeholder="🔍 Search by title or company"
+        placeholder=" Search company name here"
         className="border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
         value={filters.keyword}
         onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
@@ -160,7 +161,7 @@ export default function Home() {
         value={filters.jobType}
         onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
       >
-        <option value="All">All Job Types</option>
+        <option value="All">All Type of Jobs</option>
         <option value="Full-time">Full-time</option>
         <option value="Part-time">Part-time</option>
         <option value="Internship">Internship</option>
@@ -200,15 +201,7 @@ export default function Home() {
         ))}
       </div>
 
-      <select
-        className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="default">Sort By</option>
-        <option value="title">Title (A–Z)</option>
-        <option value="company">Company (A–Z)</option>
-      </select>
+
     </div>
 
     {/* Job Listings */}

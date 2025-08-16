@@ -53,44 +53,67 @@ export default function EditJobPage() {
     }
   };
 
-  if (loading) return <p className="p-6 text-gray-500">Loading job data...</p>;
+  if (loading)
+    return (
+      <p className="p-6 text-gray-500 text-center text-lg">loading...</p>
+    );
 
   return (
-    <main className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">✏️ Edit Job</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {["title", "company", "location", "tags"].map((field) => (
-          <input
-            key={field}
-            type="text"
-            name={field}
-            placeholder={field}
-            value={form[field]}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
-            required={field !== "tags"}
-          />
-        ))}
+    <main className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
+        {/* Header */}
+        <h1 className="text-3xl font-extrabold text-center mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          ✏️ Edit Job
+        </h1>
 
-        <select
-          name="job_type"
-          value={form.job_type}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
-        >
-          <option>Full-time</option>
-          <option>Part-time</option>
-          <option>Internship</option>
-          <option>Contract</option>
-        </select>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {["title", "company", "location", "tags"].map((field) => (
+            <div key={field}>
+              <label className="block text-black font-medium mb-2 capitalize">
+                {field}
+              </label>
+              <input
+                type="text"
+                name={field}
+                placeholder={`Enter ${field}`}
+                value={form[field]}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 outline-none transition bg-gray-50 text-black placeholder-gray-400"
+                required={field !== "tags"}
+              />
+            </div>
+          ))}
 
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Save Changes
-        </button>
-      </form>
+          {/* Job type */}
+          <div>
+            <label className="block text-black font-medium mb-2">
+              Job Type
+            </label>
+            <select
+              name="job_type"
+              value={form.job_type}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-400 outline-none transition bg-gray-50 text-black"
+            >
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Internship</option>
+              <option>Contract</option>
+            </select>
+          </div>
+
+          {/* Save button */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-[#00c3c3] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#00a9a9] transition font-semibold"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }

@@ -117,124 +117,122 @@ export default function Home() {
   });
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-         Job Listings
-      </h1>
+  <main className="max-w-6xl mx-auto px-4 py-10 bg-white">
+    <h1 className="text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+      Job Listings
+    </h1>
 
-      {/* Controls */}
-      <div className="flex flex-wrap justify-end gap-3 mb-8">
+    {/* Controls */}
+    <div className="flex flex-wrap justify-end gap-3 mb-8">
+      <button
+        onClick={resetFilters}
+        className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+      >
+        Reset Filters
+      </button>
+      {jobs.length > 0 && (
         <button
-          onClick={resetFilters}
-          className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
+          onClick={handleDeleteAll}
+          className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
         >
-          Reset Filters
+          Delete All
         </button>
-        {jobs.length > 0 && (
-          <button
-            onClick={handleDeleteAll}
-            className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
+      )}
+      <button
+        onClick={handleScrape}
+        className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
+      >
+        Scrape Jobs
+      </button>
+    </div>
+
+    {/* Filters */}
+    <div className="mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg">
+      <input
+        type="text"
+        placeholder="🔍 Search by title or company"
+        className="border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
+        value={filters.keyword}
+        onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
+      />
+      <select
+        className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
+        value={filters.jobType}
+        onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
+      >
+        <option value="All">All Job Types</option>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Internship">Internship</option>
+      </select>
+      <select
+        className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
+        value={filters.location}
+        onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+      >
+        {locations.map((loc, i) => (
+          <option key={i} value={loc}>
+            {loc}
+          </option>
+        ))}
+      </select>
+
+      {/* Tags */}
+      <div className="md:col-span-2 lg:col-span-3 flex flex-wrap gap-3">
+        {tags.map((tag) => (
+          <label
+            key={tag}
+            className="flex items-center space-x-2 text-sm text-black bg-white/40 px-3 py-1 rounded-full cursor-pointer hover:bg-white/30 transition"
           >
-            Delete All
-          </button>
-        )}
-        <button
-          onClick={handleScrape}
-          className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
-        >
-          Scrape Jobs
-        </button>
+            <input
+              type="checkbox"
+              value={tag}
+              checked={filters.tags.includes(tag)}
+              onChange={() => {
+                const updatedTags = filters.tags.includes(tag)
+                  ? filters.tags.filter((t) => t !== tag)
+                  : [...filters.tags, tag];
+                setFilters({ ...filters, tags: updatedTags });
+              }}
+            />
+            <span>{tag}</span>
+          </label>
+        ))}
       </div>
 
-      {/* Filters */}
-      <div className="mb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg">
-        <input
-          type="text"
-          placeholder="🔍 Search by title or company"
-          className="border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
-          value={filters.keyword}
-          onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
-        />
-        <select
-          className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
-          value={filters.jobType}
-          onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
-        >
-          <option value="All">All Job Types</option>
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Internship">Internship</option>
-        </select>
-        <select
-          className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
-          value={filters.location}
-          onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-        >
-          {locations.map((loc, i) => (
-            <option key={i} value={loc}>
-              {loc}
-            </option>
-          ))}
-        </select>
+      <select
+        className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+      >
+        <option value="default">Sort By</option>
+        <option value="title">Title (A–Z)</option>
+        <option value="company">Company (A–Z)</option>
+      </select>
+    </div>
 
-        {/* Tags */}
-        <div className="md:col-span-2 lg:col-span-3 flex flex-wrap gap-3">
-          {tags.map((tag) => (
-            <label
-              key={tag}
-              className="flex items-center space-x-2 text-sm text-black bg-white/40 px-3 py-1 rounded-full cursor-pointer hover:bg-white/30 transition"
+    {/* Job Listings */}
+    {sortedJobs.length === 0 ? (
+      <p className="text-center text-gray-400">No matching jobs found.</p>
+    ) : (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedJobs.map((job) => (
+          <div
+            key={job.id}
+            className="bg-white/80 backdrop-blur-lg shadow-lg rounded-xl p-6 relative hover:scale-[1.02] transition-transform flex flex-col justify-between h-full"
+          >
+            <button
+              onClick={() => handleDelete(job.id)}
+              className="absolute top-3 right-4 text-red-500 hover:text-red-700 transition"
             >
-              <input
-                type="checkbox"
-                value={tag}
-                checked={filters.tags.includes(tag)}
-                onChange={() => {
-                  const updatedTags = filters.tags.includes(tag)
-                    ? filters.tags.filter((t) => t !== tag)
-                    : [...filters.tags, tag];
-                  setFilters({ ...filters, tags: updatedTags });
-                }}
-              />
-              <span>{tag}</span>
-            </label>
-          ))}
-        </div>
+              ❌
+            </button>
 
-        <select
-          className="border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full text-black bg-white/40"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="default">Sort By</option>
-          <option value="title">Title (A–Z)</option>
-          <option value="company">Company (A–Z)</option>
-        </select>
-      </div>
-
-      {/* Job Listings */}
-      {sortedJobs.length === 0 ? (
-        <p className="text-center text-gray-400">No matching jobs found.</p>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedJobs.map((job) => (
-            <div
-              key={job.id}
-              className="bg-white/80 backdrop-blur-lg shadow-lg rounded-xl p-6 relative hover:scale-[1.02] transition-transform"
-            >
-              <button
-                onClick={() => handleDelete(job.id)}
-                className="absolute top-3 right-4 text-red-500 hover:text-red-700 transition"
-              >
-                ❌
-              </button>
-              <a
-                href={`/edit-job/${job.id}`}
-                className="absolute top-3 right-12 text-blue-500 hover:underline"
-              >
-                 Edit
-              </a>
+            <div>
               <h2 className="text-xl font-bold text-gray-900">{job.title}</h2>
-              <p className="text-gray-700">{job.company} — {job.location}</p>
+              <p className="text-gray-700">
+                {job.company} — {job.location}
+              </p>
               <p className="text-sm text-blue-600 mt-1">{job.job_type}</p>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -248,9 +246,20 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      )}
-    </main>
-  );
+
+            <div className="mt-4 flex justify-end">
+              <a
+                href={`/edit-job/${job.id}`}
+                className="px-3 py-1 rounded-lg text-white"
+                style={{ backgroundColor: "#00c3c3" }}
+              >
+                Edit
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </main>
+);
 }

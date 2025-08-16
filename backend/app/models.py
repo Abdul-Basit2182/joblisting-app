@@ -8,4 +8,4 @@ class Job(db.Model):
     location = db.Column(db.String(120), nullable=False)
     posting_date = db.Column(db.DateTime, default=datetime.utcnow)
     job_type = db.Column(db.String(50))
-    tags = db.Column(db.String(250))  # Comma-separated tags
+    tags = db.Column(db.String(250))  

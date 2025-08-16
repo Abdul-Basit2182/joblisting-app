@@ -55,18 +55,6 @@ export default function Home() {
     }
   };
 
-  const handleScrape = async () => {
-    if (confirm("Run scraper to fetch new job listings?")) {
-      try {
-        const res = await API.post("/scrape");
-        alert(res.data.message || "Scraping done.");
-        fetchJobs();
-      } catch (err) {
-        console.error("Scrape error:", err);
-        alert("Scraping failed. Check console for details.");
-      }
-    }
-  };
 
   const handleDeleteAll = async () => {
     if (confirm("⚠️ This will permanently delete all job listings. Continue?")) {
